@@ -1,0 +1,251 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    opacity: 1;
+}
+:root{
+    --white-1: #ffffff;
+    --blue-1: #92B8FF;
+    --blue-2: #AECEFF;
+    --blue-3: #C7E4FF;
+    --purple-1: #B29AE7;
+    --purple-2: #A586E3;
+    --purple-3: #9370DC;
+
+    --dark-shadow: #0000009c;
+    --light-shadow: #ffffff9c;
+}
+fieldset{
+    border: none;
+}
+main{
+    min-height: 90vh;
+}
+img{
+    max-width: 100%;
+}
+/*===Grid===*/
+body{
+    display: grid;
+    grid-template-areas: 
+    "nav"
+    "header"
+    "main"
+    "footer";
+}
+nav{
+    grid-area: nav;
+}
+header{
+    grid-area: header;
+}
+main{
+    grid-area: main;
+}
+footer{
+    grid-area: footer;
+}
+
+/*===Nav===*/
+nav{
+    display: flex;
+    align-items: center;
+    position: sticky;
+    background-color: var(--purple-2);
+    height: 50px;
+    box-shadow: 0px 0px 10px var(--dark-shadow);
+}
+nav p{
+    position: absolute;
+    left: 10%;
+    color: var(--white-1);
+    font-size: 30px;
+}
+nav p span{
+    color: var(--blue-2);
+}
+nav section{
+    display: flex;
+    position: absolute;
+    right: 5%;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+}
+nav section a{
+    color: var(--white-1);
+    text-decoration: none;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+.activePage{
+    box-shadow: inset 0px 0px 5px var(--light-shadow);
+    border-radius: 5px;
+}
+/*===Footer===*/
+footer{
+    background-color: var(--purple-1);
+}
+/*===Login===*/
+.loginGrid{
+    display: grid;
+    position: relative;
+    background-image: url("../images/vermont.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(10px);
+    background-size: 100%;
+    z-index: 1;
+}
+.entireLogin{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-areas: 
+    "login imageLogin";
+    width: 50%;
+    margin: 50px auto;
+}
+.entireLogin form{
+    grid-area: login;
+    background-color: var(--purple-1);
+    border-radius: 15px;
+    padding: 3em 5em;
+    box-shadow: inset 0px 0px 10px var(--light-shadow);
+}
+.loginImage{
+    grid-area: imageLogin;
+    background-color: var(--purple-3);
+    margin: 15px 0;
+    border-radius: 0 15px 15px 0;
+}
+.loginImage>h2{
+    margin: 0 auto;
+    margin-top: 50%;
+    color: white;
+    text-align: center;
+}
+.entireLogin>form>h2{
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+}
+
+.loginInfo p{
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0;
+    color: white;
+}
+.loginInfo p label{
+    margin-left: 10px;
+}
+input[type = 'text'], input[type = 'email']{
+    padding: 5px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    background-color: white;
+    opacity: 0.7;
+}
+input[type = 'text']:hover, input[type = 'email']:hover{
+    opacity: 1;
+    box-shadow: 3px 3px 5px var(--dark-shadow);
+}
+input[type = 'text']:focus, input[type = 'email']:focus{
+    opacity: 1;
+    box-shadow: 3px 3px 5px var(--dark-shadow);
+    outline: none;
+}
+input[type = 'submit']{
+    padding: 5px;
+    border: none;
+    margin: auto;
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    background-color: white;
+    opacity: 0.7;
+}
+.signupImage a, .loginImage a{
+    text-decoration: none;
+}
+.signupImage a p, .loginImage a p{
+    padding: 10px;
+    border: none;
+    margin: auto;
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    color: black;
+    background-color: white;
+    opacity: 0.7;
+    text-decoration: none;
+    text-align: center;
+}
+/*===Sign Up===*/
+.backgroundOverlay{
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/vermont.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    --webkit-filter: blur(5px);
+    z-index: -1;
+}
+.backgroundOverlay img{
+    width: 100%;
+    --webkit-filter: blur(5px);
+}
+.signupGrid{
+    display: grid;
+    position: relative;
+    z-index: 1;
+}
+.entireSignup{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas: 
+    "imageSignup signup";
+    width: 50%;
+    margin: 50px auto;
+}
+.entireSignup form{
+    grid-area: signup;
+    background-color: var(--purple-1);
+    border-radius: 15px;
+    padding: 3em 5em;
+    box-shadow: inset 0px 0px 10px var(--light-shadow);
+}
+.signupImage{
+    grid-area: imageSignup;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--purple-3);
+    margin: 15px 0;
+    border-radius: 15px 0 0 15px;
+}
+.signupImage>h2{
+    margin: 0 auto;
+    margin-top: 50%;
+    color: white;
+    text-align: center;
+}
+.entireSignup>form>h2{
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+}
+.signupInfo p{
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0;
+    color: white;
+}
+.signupInfo p label{
+    margin-left: 10px;
+}
