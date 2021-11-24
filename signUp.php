@@ -1,30 +1,17 @@
 <?php
 include 'top.php';
+include 'phpFunctions.php';
 
 //Initialize variables
+$profilePic = '';
 $firstName = '';
 $lastName = '';
 $email = '';
 $password = '';
+$repassword = '';
 
 $saveData = true;
 
-//function to check for text and nums
-function verifyAlphaNum($testString)
-{
-    return (preg_match ("/^([[:alnum:]]|-|\.| |\'|&|;|#)+$/", $testString));
-}
-//sanatization function
-function getData($field) {
-    if (!isset($_POST[$field])) {
-       $data = "";
-    }
-    else {
-       $data = trim($_POST[$field]);
-       $data = htmlspecialchars($data);
-    }
-    return $data;
- }
 ?>
 <main class = 'signupGrid'>
     <div class = 'backgroundOverlay'></div>
@@ -38,15 +25,50 @@ function getData($field) {
                     print '</pre>';
                 }
                 //======sanatize data=======
+                $profilePic = getData('fleProfilePic');
+                $firstName = getData('txtFirstName');
+                $lastName = getData('txtLastName');
                 $email = filter_var($_POST['txtEmail'], FILTER_SANITIZE_EMAIL);
                 $password = getData('txtPassword');
+                $repassword = getData('txtRePassword');
 
                 //======validate data=======
+
+                //Profile picture
+                validateProfilePic();
+                //First Name
+                if ($firstname == "")
+                {
+                    print '<p>First name cannot be blank</p>';
+                    $saveData = false;
+                }
+                elseif (!verifyAlphaNum($firstName))
+                {
+                    print '<p>Your first name appears to have invalid characters</p>';
+                    $saveData == false;
+                }
+                //Last Name
+                if ($lastName == "")
+                {
+                    print '<p>Last name cannot be blank</p>';
+                    $saveData = false;
+                }
+                elseif (!verifyAlphaNum($lastName))
+                {
+                    print '<p>Your last name appears to have invalid characters</p>';
+                    $saveData == false;
+                }
                 //Email
-                if (!filter_var($email, FILTER_SANITIZE_EMAIL)){
+                if ($email == "")
+                {
+                    print '<p>Email cannot be blank</p>';
+                    $saveData = false;
+                }
+                elseif (!filter_var($email, FILTER_SANITIZE_EMAIL)){
                     print '<p>Please enter a valid email address.</p>';
                     $saveData = false;
                 }
+                //password
                 if ($password == "")
                 {
                     print '<p>Password cannot be blank</p>';
@@ -57,13 +79,29 @@ function getData($field) {
                     print '<p>Your password appears to have invalid characters</p>';
                     $saveData == false;
                 }
+                if($saveData){
+                    move_uploaded_file($tmp_name, $img_upload_path);
+
+                    
+                }
             }
             ?>
         </section>
         <form action="#" method="POST">
             <h2>Sign Up</h2>
+            <section class = "profilePicSection">
+                <!--==profile pic==-->
+                <figure class = 'signupProfilePic'>
+                    <img src = 'images/placeholder.png' onClick="triggerClick()">
+                </figure>
+                <input type="file" id="fleProfilePic" onChange="displayImage(this)" name="fleProfilePic" class = "fleProfilePic">
+                
+            </section>
+
+            <div class = 'creditsTo'> Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             <!--Contact Info-->
-            <fieldset class = "signupInfo">
+            <fieldset class = "signupContactInfo">
+            <legend>Contact Info</legend>
                 <p>
                     <label for = "txtFirstName">First Name</label>
                     <input id = "txtFirstName"     
@@ -103,22 +141,35 @@ function getData($field) {
                         value = "<?php print $lastName; ?>"
                     >
                 </p>
+            </fieldset>
+
+            <fieldset class = "signupPasswords">
+            <legend>Password</legend>
                 <p>
                     <label for = "txtPassword">Password</label>
                     <input id = "txtPassword"     
                         name = "txtPassword"
                         maxlength = "25"
                         type = "text"
-                        value = "<?php print $lastName; ?>"
+                        value = "<?php print $password; ?>"
                     >
                 </p> 
+                <p>
+                    <label for = "txtRePassword">Confirm Password</label>
+                    <input id = "txtRePassword"     
+                        name = "txtRePassword"
+                        maxlength = "25"
+                        type = "text"
+                        value = "<?php print $repassword; ?>"
+                    >
+                </p>
+            </fieldset>
                 <p>
                     <input id = 'btnSubmit'
                             name = 'btnSubmit'
                             type = "submit"
                             value = "Sign Up">
                 </p>
-            </fieldset>
         </form>
         <section class = 'signupImage'>
             <h2>Already Have an Account?</h2>
