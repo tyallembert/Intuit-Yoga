@@ -25,7 +25,6 @@ $saveData = true;
                     print '</pre>';
                 }
                 //======sanatize data=======
-                $profilePic = getData('fleProfilePic');
                 $firstName = getData('txtFirstName');
                 $lastName = getData('txtLastName');
                 $email = filter_var($_POST['txtEmail'], FILTER_SANITIZE_EMAIL);
@@ -33,11 +32,10 @@ $saveData = true;
                 $repassword = getData('txtRePassword');
 
                 //======validate data=======
-
                 //Profile picture
-                validateProfilePic();
+                $upload_array = validateProfilePic();
                 //First Name
-                if ($firstname == "")
+                if ($firstName == "")
                 {
                     print '<p>First name cannot be blank</p>';
                     $saveData = false;
@@ -80,23 +78,27 @@ $saveData = true;
                     $saveData == false;
                 }
                 if($saveData){
-                    move_uploaded_file($tmp_name, $img_upload_path);
 
-                    
+                    if(move_uploaded_file($upload_array[0], $upload_array[1])){
+                        print '<p>Success!</p>';
+                    };
+
+
                 }
             }
             ?>
         </section>
-        <form action="#" method="POST">
+        <form action="#" method="POST" enctype="multipart/form-data">
             <h2>Sign Up</h2>
-            <section class = "profilePicSection">
-                <!--==profile pic==-->
-                <figure class = 'signupProfilePic'>
-                    <img src = 'images/placeholder.png' onClick="triggerClick()">
-                </figure>
-                <input type="file" id="fleProfilePic" onChange="displayImage(this)" name="fleProfilePic" class = "fleProfilePic">
-                
-            </section>
+            <fieldset class = "profilePicFieldset">
+                <section class = "profilePicSection">
+                    <!--==profile pic==-->
+                    <figure class = 'signupProfilePic'>
+                        <img src = 'images/placeholder.png' onClick="triggerClick()">
+                    </figure>
+                    <input type="file" id="fleProfilePic" onChange="displayImage(this)" name="fleProfilePic" class = "fleProfilePic">
+                </section>
+            </fieldset>
 
             <div class = 'creditsTo'> Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             <!--Contact Info-->

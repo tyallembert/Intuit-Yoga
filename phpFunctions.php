@@ -27,12 +27,10 @@ function getData($field) {
     $img_ex = strtolower($img_ex);
     $allowed_exs = array("jpg", "jpeg", "png");
 
-
     $profileImageName = time() . '-' . $img_name;
     // For image upload
     $target_dir = "images/";
     $target_file = $target_dir . basename($profileImageName);
-    // VALIDATION
     // validate image size. Size is calculated in Bytes
     if($img_size > 200000) {
         print '<p>Image file is too large</p>';
@@ -40,6 +38,7 @@ function getData($field) {
     }
     //checks to see if file extension is alright
     if (!in_array($img_ex, $allowed_exs)){
+        print '<p>'.$img_ex.'</p>';
         print '<p class = "mistake">File extension is not allowed. Please use .jpg, .jpeg, or .png</p>';
         $saveData = false;
     }
@@ -48,5 +47,7 @@ function getData($field) {
         print '<p>Image file already exists</p>';
         $saveData = false;
     }
+    $name_path = array($tmp_name, $target_file);
+    return $name_path;
  }
 ?>
