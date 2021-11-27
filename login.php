@@ -1,28 +1,17 @@
 <?php
+//starts session for passing variables
+session_start();
+
 include 'top.php';
 
 //Initialize variables
 $email = '';
 $password = '';
 
+$adminEmails = array('mstoner921@gmail.com', 'tyallembert@gmail.com');
+$adminPasswords = array('1964Mama', 'Ilikepie11');
 $saveData = true;
 
-//function to check for text and nums
-function verifyAlphaNum($testString)
-{
-    return (preg_match ("/^([[:alnum:]]|-|\.| |\'|&|;|#)+$/", $testString));
-}
-//sanatization function
-function getData($field) {
-    if (!isset($_POST[$field])) {
-       $data = "";
-    }
-    else {
-       $data = trim($_POST[$field]);
-       $data = htmlspecialchars($data);
-    }
-    return $data;
- }
 ?>
 <main class = 'loginGrid'>
     <div class = 'backgroundOverlay'></div>
@@ -37,23 +26,43 @@ function getData($field) {
                 }
                 //======sanatize data=======
                 $email = filter_var($_POST['txtEmail'], FILTER_SANITIZE_EMAIL);
-                $password = getData('txtPassword');
+                $password = getData('pssPassword');
 
                 //======validate data=======
                 //Email
                 if (!filter_var($email, FILTER_SANITIZE_EMAIL)){
-                    print '<p>Please enter a valid email address.</p>';
+                    print '<p class = "mistake">Please enter a valid email address.</p>';
                     $saveData = false;
                 }
                 if ($password == "")
                 {
-                    print '<p>Password cannot be blank</p>';
+                    print '<p class = "mistake">Password cannot be blank</p>';
                     $saveData = false;
                 }
                 elseif (!verifyAlphaNum($password))
                 {
-                    print '<p>Your password appears to have invalid characters</p>';
+                    print '<p class = "mistake">Your password appears to have invalid characters</p>';
                     $saveData == false;
+                }
+                if($saveData){
+                    $sql = 'SELECT *';
+                    $sql .= 'FROM tblUsers ';
+                    $data = '';
+                    $users = $thisDatabaseReader->select($sql, $data);
+                    foreach($users as $user){
+                        //choose if its a user logging in or admin
+                        if(in_array($user['pmkEmail'], $adminEmails) && in_array($user['fldPassword'], $adminPasswords)){
+                            //sending email over to logged in pages
+                            header('Location: admin/insertYoga.php');
+                            exit;
+                        }elseif($user['pmkEmail'] == $email && $user['fldPassword'] == $password){
+                            //sending email over to logged in pages
+                            $_SESSION['email'] = $email;
+                            header('Location: loggedIn/yogaClasses.php');
+                            exit;
+                        }
+
+                    }
                 }
             }
             ?>
@@ -72,12 +81,12 @@ function getData($field) {
                     >
                 </p>
                 <p>
-                    <label for = "txtPassword">Password</label>
-                    <input id = "txtPassword"     
-                        name = "txtPassword"
-                        maxlength = "25"
-                        type = "text"
-                        value = "<?php print $lastName; ?>"
+                    <label for = "pssPassword">Password</label>
+                    <input id = "pssPassword"     
+                        name = "pssPassword"
+                        minlength = "5"
+                        type = "password"
+                        value = "<?php print $password; ?>"
                     >
                 </p> 
                 <p>

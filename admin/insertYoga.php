@@ -10,6 +10,8 @@ $startDate = '';
 $endDate = '';
 $classTitle = '';
 $classDescription = '';
+$sessionCost = '';
+$individualCost = '';
 $participants = '';
 
 $saveData = true;
@@ -28,6 +30,8 @@ if(isset($_POST['btnSubmit'])){
     $endDate = getData('txtEndDate');
     $classTitle = getData('txtClassTitle');
     $classDescription = getData('txtClassDescription');
+    $sessionCost = (int)getData('txtSessionCost');
+    $individualCost = (int)getData('txtIndividualCost');
     $participants = (int)getData('txtParticipants');
 
     //===Validate Data===
@@ -49,7 +53,7 @@ if(isset($_POST['btnSubmit'])){
         print '<p class = "mistake">The start time of the class has invalid characters</p>';
         $saveData == false;
     }
-    //===Start Time of the class===
+    //===End Time of the class===
     if ($endTime == ""){
         print '<p class = "mistake">Please enter the ebnd time of class</p>';
         $saveData = false;
@@ -67,21 +71,39 @@ if(isset($_POST['btnSubmit'])){
         print '<p class = "mistake">The title of the class has invalid characters</p>';
         $saveData == false;
     }
-    //===Class Title===
-    if ($classTitle == ""){
+    //===Class Description===
+    if ($classDescription == ""){
         print '<p class = "mistake">Please enter the description of the class</p>';
         $saveData = false;
     }
-    elseif (!verifyAlphaNum($classTitle)){
+    elseif (!verifyAlphaNum($classDescription)){
         print '<p class = "mistake">The description of the class has invalid characters</p>';
         $saveData == false;
     }
-    //===Class Title===
-    if ($classTitle == ""){
+    //===Session Cost===
+    if ($sessionCost == ""){
+        print '<p class = "mistake">Please enter the session cost</p>';
+        $saveData = false;
+    }
+    elseif (!verifyAlphaNum($sessionCost)){
+        print '<p class = "mistake">The session cost should only be numbers</p>';
+        $saveData == false;
+    }
+    //===Session Cost===
+    if ($individualCost == ""){
+        print '<p class = "mistake">Please enter the individual cost</p>';
+        $saveData = false;
+    }
+    elseif (!verifyAlphaNum($individualCost)){
+        print '<p class = "mistake">The individual cost should only be numbers</p>';
+        $saveData == false;
+    }
+    //===Class Participants===
+    if ($participants == ""){
         print '<p class = "mistake">Please enter the max participants of the class</p>';
         $saveData = false;
     }
-    elseif (!verifyAlphaNum($classTitle)){
+    elseif (!verifyAlphaNum($participants)){
         print '<p class = "mistake">The max participants of the class should only contain numbers</p>';
         $saveData == false;
     }
@@ -99,13 +121,14 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldEndDate = ?, ';
             $sql .= 'fldTitle = ?, ';
             $sql .= 'fldDescription = ?, ';
+            $sql .= 'fldSessionCost = ?, ';
+            $sql .= 'fldIndividualCost = ?, ';
             $sql .= 'fldParticipants = ? ';
             $sql .= 'WHERE pmkWildlifeId = ' . $critterID . ';';
 
-            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $participants);
+            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants);
                 
         }else{
-            print '<p>got here</p>';
             $sql = 'INSERT INTO tblYogaClasses SET ';
             $sql .= 'fldDay = ?, ';
             $sql .= 'fldStartTime = ?, ';
@@ -114,9 +137,11 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldEndDate = ?, ';
             $sql .= 'fldTitle = ?, ';
             $sql .= 'fldDescription = ?, ';
+            $sql .= 'fldSessionCost = ?, ';
+            $sql .= 'fldIndividualCost = ?, ';
             $sql .= 'fldParticipants = ? ';
 
-            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $participants);
+            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants);
         }
         //==Save to Wildlife table==
         if(DEBUG){
@@ -200,6 +225,23 @@ if(isset($_POST['btnSubmit'])){
                             maxlength = "25"
                             type = "text"
                             value = "<?php print $classDescription; ?>"
+                        >
+                </section>
+                <!--===Cost of classes===-->
+                <section class = "costSection">
+                    <label for = "txtSessionCost">Session Cost</label>
+                    <input id = "txtSessionCost"     
+                            name = "txtSessionCost"
+                            maxlength = "3"
+                            type = "text"
+                            value = "<?php print $sessionCost; ?>"
+                        >
+                    <label for = "txtIndividualCost">Individual Cost</label>
+                    <input id = "txtIndividualCost"     
+                            name = "txtIndividualCost"
+                            maxlength = "3"
+                            type = "text"
+                            value = "<?php print $individualCost; ?>"
                         >
                 </section>
                 <!--===Number of Participants===-->

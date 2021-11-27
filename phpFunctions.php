@@ -27,7 +27,12 @@ function getData($field) {
     $img_ex = strtolower($img_ex);
     $allowed_exs = array("jpg", "jpeg", "png");
 
-    $profileImageName = time() . '-' . $img_name;
+    if($img_name == ""){
+        $profilePic = "placeholder.png";
+        $img_ex = "png";
+    }else{
+        $profilePic = time() . '-' . $img_name;
+    }
     // For image upload
     $target_dir = "images/";
     $target_file = $target_dir . basename($profileImageName);
@@ -42,12 +47,8 @@ function getData($field) {
         print '<p class = "mistake">File extension is not allowed. Please use .jpg, .jpeg, or .png</p>';
         $saveData = false;
     }
-    // check if file exists
-    if(file_exists($target_file)) {
-        print '<p>Image file already exists</p>';
-        $saveData = false;
-    }
-    $name_path = array($tmp_name, $target_file);
+    
+    $name_path = array($tmp_name, $target_file, $profilePic);
     return $name_path;
  }
 ?>

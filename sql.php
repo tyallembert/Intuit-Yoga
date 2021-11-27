@@ -2,13 +2,15 @@
 include 'top.php';
 ?>
 
+<h2>Create Users Table</h2>
 <pre>
 CREATE TABLE tblUsers (
     fldProfilePicture VARCHAR(50),
     fldFirstName VARCHAR(50),
     fldLastName VARCHAR(50),
-    fldEmail VARCHAR(50),
+    pmkEmail VARCHAR(50) NOT NULL PRIMARY KEY,
     fldPhone VARCHAR(15),
+    fldExperience VARCHAR(15),
     fldPassword VARCHAR(100)
 );
 </pre>
@@ -23,6 +25,8 @@ CREATE TABLE tblYogaClasses (
     fldEndDate VARCHAR(15),
     fldTitle VARCHAR(50),
     fldDescription VARCHAR(200),
+    fldSessionCost TINYINT(1),
+    fldIndividualCost TINYINT(1),
     fldParticipants TINYINT(1)
 );
 </pre>

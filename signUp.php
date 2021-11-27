@@ -1,4 +1,7 @@
 <?php
+//starts session for passing variables
+session_start();
+
 include 'top.php';
 
 //Initialize variables
@@ -6,6 +9,8 @@ $profilePic = '';
 $firstName = '';
 $lastName = '';
 $email = '';
+$phone = '';
+$experience = '';
 $password = '';
 $repassword = '';
 
@@ -27,67 +32,127 @@ $saveData = true;
                 $firstName = getData('txtFirstName');
                 $lastName = getData('txtLastName');
                 $email = filter_var($_POST['txtEmail'], FILTER_SANITIZE_EMAIL);
-                $password = getData('txtPassword');
-                $repassword = getData('txtRePassword');
+                $phone = getData('txtPhone');
+                $experience = getData('radExperience');
+                $password = getData('pssPassword');
+                $repassword = getData('pssRePassword');
 
                 //======validate data=======
                 //Profile picture
                 $upload_array = validateProfilePic();
+                //name of image
+                $profilePic = $upload_array[2];
                 //First Name
                 if ($firstName == "")
                 {
-                    print '<p>First name cannot be blank</p>';
+                    print '<p class = "mistake">First name cannot be blank</p>';
                     $saveData = false;
                 }
                 elseif (!verifyAlphaNum($firstName))
                 {
-                    print '<p>Your first name appears to have invalid characters</p>';
+                    print '<p class = "mistake">Your first name appears to have invalid characters</p>';
                     $saveData == false;
                 }
                 //Last Name
                 if ($lastName == "")
                 {
-                    print '<p>Last name cannot be blank</p>';
+                    print '<p class = "mistake">Last name cannot be blank</p>';
                     $saveData = false;
                 }
                 elseif (!verifyAlphaNum($lastName))
                 {
-                    print '<p>Your last name appears to have invalid characters</p>';
+                    print '<p class = "mistake">Your last name appears to have invalid characters</p>';
                     $saveData == false;
                 }
                 //Email
                 if ($email == "")
                 {
-                    print '<p>Email cannot be blank</p>';
+                    print '<p class = "mistake">Email cannot be blank</p>';
                     $saveData = false;
                 }
                 elseif (!filter_var($email, FILTER_SANITIZE_EMAIL)){
-                    print '<p>Please enter a valid email address.</p>';
+                    print '<p class = "mistake">Please enter a valid email address.</p>';
+                    $saveData = false;
+                }
+                //Phone
+                if ($phone == "")
+                {
+                    print '<p class = "mistake">Phone number cannot be blank</p>';
+                    $saveData = false;
+                }
+                elseif (!verifyAlphaNum($phone)){
+                    print '<p class = "mistake">Please enter a valid phone number</p>';
+                    $saveData = false;
+                }
+                //Experience level 
+                if ($experience != "Newbie" && $experience != "Intermediate" && $experience != "Expert")
+                {
+                    print '<p class = "mistake">Please choose your experience level</p>';
                     $saveData = false;
                 }
                 //password
                 if ($password == "")
                 {
-                    print '<p>Password cannot be blank</p>';
+                    print '<p class = "mistake">Password cannot be blank</p>';
                     $saveData = false;
                 }
                 elseif (!verifyAlphaNum($password))
                 {
-                    print '<p>Your password appears to have invalid characters</p>';
+                    print '<p class = "mistake">Your password appears to have invalid characters</p>';
                     $saveData == false;
                 }
+                elseif($password != $repassword){
+                    print '<p class = "mistake">Your passwords do not match</p>';
+                    $saveData == false;
+                }
+
+                //see if user already exists
+                $sql = 'SELECT *';
+                $sql .= 'FROM tblUsers';
+                $data = '';
+                $classes = $thisDatabaseReader->select($sql, $data);
+                foreach($users as $user){
+                    if($user['pmkEmail'] == $email){
+                        print '<p class = "mistake">There is already an account with this email</p>';
+                        $saveData = false;
+                    }
+                }
+
                 if($saveData){
 
                     if(move_uploaded_file($upload_array[0], $upload_array[1])){
                         print '<p>Success!</p>';
                     };
+                    
+                    $sql = 'INSERT INTO tblUsers SET ';
+                    $sql .= 'fldProfilePicture = ?, ';
+                    $sql .= 'fldFirstName = ?, ';
+                    $sql .= 'fldLastName = ?, ';
+                    $sql .= 'pmkEmail = ?, ';
+                    $sql .= 'fldPhone = ?, ';
+                    $sql .= 'fldExperience = ?, ';
+                    $sql .= 'fldPassword = ? ';
 
+                    $data = array($profilePic, $firstName, $lastName, $email, $phone, $experience, $password);
 
+                    if(DEBUG){
+                        print $thisDatabaseReader->displayQuery($sql, $data);
+                    }else{
+                        if($thisDatabaseWriter->insert($sql, $data)){
+                            print '<section class="successfulDatabase">';
+                            print '<h2 >You have successfully signed up!</h2>';
+                            print '<a href="loggedIn/yogaClasses.php">Continue</a>';
+                            print '</section>';
+
+                            //sending email over to logged in pages
+                            $_SESSION['email'] = $email;
+                        }
+                    }
                 }
             }
             ?>
         </section>
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action = "loggedIn/yogaClasses.php" method="POST" enctype="multipart/form-data">
             <h2>Sign Up</h2>
             <fieldset class = "profilePicFieldset">
                 <section class = "profilePicSection">
@@ -136,31 +201,57 @@ $saveData = true;
                     <label for = "txtPhone">Phone</label>
                     <input id = "txtPhone"     
                         name = "txtPhone"
-                        maxlength = "15"
+                        maxlength = "13"
                         type = "text"
                         required
-                        value = "<?php print $lastName; ?>"
+                        value = "<?php print $phone; ?>"
                     >
                 </p>
             </fieldset>
-
+            <fieldset class = "signupExperience">
+            <legend>Experience Level</legend>
+                <p>
+                    <label for = "radExperienceNewbie">Newbie</label>
+                    <input id = "radExperienceNewbie"     
+                        name = "radExperience"
+                        type = "radio"
+                        value = "Newbie"
+                    >
+                </p>
+                <p>
+                    <label for = "radExperienceIntermediate">Intermediate</label>
+                    <input id = "radExperienceIntermediate"     
+                        name = "radExperience"
+                        type = "radio"
+                        value = "Intermediate"
+                    >
+                </p>
+                <p>
+                    <label for = "radExperienceExpert">Expert</label>
+                    <input id = "radExperienceExpert"     
+                        name = "radExperience"
+                        type = "radio"
+                        value = "Expert"
+                    >
+                </p>
+            </fieldset>
             <fieldset class = "signupPasswords">
             <legend>Password</legend>
                 <p>
-                    <label for = "txtPassword">Password</label>
-                    <input id = "txtPassword"     
-                        name = "txtPassword"
-                        maxlength = "25"
-                        type = "text"
+                    <label for = "pssPassword">Password</label>
+                    <input id = "pssPassword"     
+                        name = "pssPassword"
+                        minlength = "5"
+                        type = "password"
                         value = "<?php print $password; ?>"
                     >
                 </p> 
                 <p>
-                    <label for = "txtRePassword">Confirm Password</label>
-                    <input id = "txtRePassword"     
-                        name = "txtRePassword"
-                        maxlength = "25"
-                        type = "text"
+                    <label for = "pssRePassword">Confirm Password</label>
+                    <input id = "pssRePassword"     
+                        name = "pssRePassword"
+                        minlength = "5"
+                        type = "password"
                         value = "<?php print $repassword; ?>"
                     >
                 </p>
