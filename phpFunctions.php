@@ -2,7 +2,7 @@
 //function to check for text and nums
 function verifyAlphaNum($testString)
 {
-    return (preg_match ("/^([[:alnum:]]|-|\.| |\'|&|;|#)+$/", $testString));
+    return (preg_match ("/^([[:alnum:]]|-|\.|,|:| |\'|&|;|#)+$/", $testString));
 }
 //sanatization function
 function getData($field) {

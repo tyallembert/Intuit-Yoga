@@ -17,7 +17,7 @@
             print '<div class = "creditsTo"> Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik"> monkik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>';
         } 
         elseif($file == 'teacherCourses'){
-            print '<h1>Teacher Courses</h1>';
+            print '<h1>Teacher Trainings</h1>';
             print '<figure><img src="images/teacher.png"></figure>';
             print '<div class = "creditsTo"> Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik"> monkik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>';
         }?>

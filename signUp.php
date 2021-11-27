@@ -1,6 +1,5 @@
 <?php
 include 'top.php';
-include 'phpFunctions.php';
 
 //Initialize variables
 $profilePic = '';

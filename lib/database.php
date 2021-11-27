@@ -60,6 +60,7 @@ class DataBase{
 
         if (is_array($values)){
             if($statement->execute($values)){
+                print '<p>Record was saved</p>';
             }else{
                 print '<p>Record was NOT saved</p>';
             }
