@@ -25,7 +25,7 @@ fieldset{
 }
 main{
     min-height: 90vh;
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(255, 253, 223);
 }
 img{
     max-width: 100%;
@@ -54,49 +54,19 @@ footer{
 /*===Header===*/
 header{
     width: 100%;
-    height: 50vh;
     margin: auto;
-    position: relative;
     display: flex;
     justify-content: center;
 }
 header>h1{
     color: white;
-    position: absolute;
     width: 100%;
-    top: 39%;
     text-align: center;
     z-index: 1;
     font-size: 50px;
     padding: 1% 3%;
     border-radius: 10px;
     background-color: var(--purple-3);
-}
-header>figure{
-    width: 10%;
-    height: auto;
-    position: absolute;
-    z-index: 0;
-}
-header>div{
-    position: absolute;
-    top: 36%;
-    font-size: 10px;
-    color: var(--purple-3);
-    display: none;
-}
-.earthIcon{
-    width: 25%;
-    top: 5%;
-}
-.yurtIcon{
-    width: 7%;
-    left: 35%;
-    top: 15%;
-    z-index: 2;
-}
-.forestIcon{
-    left: 31%;
 }
 /*===Nav===*/
 nav{
@@ -151,7 +121,7 @@ fieldset>legend{
     width: 100%;
     border-bottom: solid 1px white;
 }
-input[type = 'text'], input[type = 'email']{
+input[type = 'text'], input[type = 'email'], input[type = 'password']{
     padding: 10px;
     height: 30px;
     border-radius: 15px;
@@ -159,24 +129,28 @@ input[type = 'text'], input[type = 'email']{
     background-color: white;
     opacity: 0.7;
 }
-input[type = 'text']:hover, input[type = 'email']:hover{
+input[type = 'text']:hover, input[type = 'email']:hover, input[type = 'password']:hover{
     opacity: 1;
     box-shadow: 3px 3px 5px var(--dark-shadow);
 }
-input[type = 'text']:focus, input[type = 'email']:focus{
+input[type = 'text']:focus, input[type = 'email']:focus, input[type = 'password']:focus{
     opacity: 1;
     box-shadow: 3px 3px 5px var(--dark-shadow);
     outline: none;
 }
-input[type = 'submit']{
+input[type = 'submit'], input[type = 'button']{
     padding: 5px;
     border: none;
     margin: auto;
-    height: 40px;
+    height: 30px;
     width: 100px;
     border-radius: 20px;
     background-color: white;
     opacity: 0.7;
+}
+input[type = 'submit']:hover, input[type = 'button']:hover{
+    cursor: pointer;
+    opacity: 1;
 }
 /*===Login===*/
 .loginGrid{
@@ -360,8 +334,65 @@ input[type = 'submit']{
 }
 /*===Yoga Classes===*/
 .calenderContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2%;
     width: 80%;
+    padding: 2%;
     margin: auto;
     border: solid 2px blue;
     border-radius: 15px;
+}
+.yogaForm{
+    color: white;
+    background-color: var(--purple-1);
+    border-radius: 10px;
+    transition: all 200ms ease;
+}
+.yogaForm:hover{
+    transform: translate(5px, -5px);
+    box-shadow: -5px 5px 5px var(--dark-shadow);
+}
+.yogaForm>h2{
+    padding: 2%;
+    border-radius: 10px 10px 0 0;
+    background-color: var(--purple-3);
+}
+.yogaDates{
+    padding: 0 0 2% 2%;
+}
+.yogaForm>h3{
+    display: inline-block;
+    padding: 2%;
+    border-radius: 0 10px 10px 0;
+    background-color: var(--purple-3);
+    border: solid 2px var(--purple-2);
+}
+.yogaDescription{
+    padding: 2%;
+}
+.yogaParticipants{
+    padding: 2%;
+}
+.costSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2% 2%;
+}
+.costSection>*{
+    width: 40%;
+    padding: 2%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px var(--dark-shadow);
+}
+.moneyAmount{
+    padding: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+.askQuestion{
+    display: flex;
+    justify-content: center;
+    padding: 2%;
 }

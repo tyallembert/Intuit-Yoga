@@ -2,16 +2,16 @@
     <p>I<span>.</span>Y<span>.</span>E<span>.</span>S</p>
     <section>
         <a class = "<?php
-        if (PATH_PARTS['filename'] == "index"){
+        if (PATH_PARTS['filename'] == "insertYoga"){
             print 'activePage';
         }
-        ?>" href = "index.php">Home</a>
+        ?>" href = "insertYoga.php">New Yoga Classes</a>
 
         <a class = "<?php
         if (PATH_PARTS['filename'] == "yogaClasses"){
             print 'activePage';
         }
-        ?>" href = "yogaClasses.php">Yoga</a>
+        ?>" href = "yogaClasses.php">New Teacher Training</a>
 
         <a class = "<?php
         if (PATH_PARTS['filename'] == "teacherCourses"){
@@ -20,15 +20,9 @@
         ?>" href = "teacherCourses.php">Teacher Courses</a>
 
         <a class = "<?php
-        if (PATH_PARTS['filename'] == "contact"){
-            print 'activePage';
-        }
-        ?>" href = "contact.php">Contact</a>
-
-        <a class = "<?php
         if (PATH_PARTS['filename'] == "login"){
             print 'activePage';
         }
-        ?>" href = "login.php">Login</a>
+        ?>" href = "../index.php">Logout</a>
     </section>
 </nav>
