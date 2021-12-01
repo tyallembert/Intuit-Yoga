@@ -73,6 +73,8 @@ nav{
     display: flex;
     align-items: center;
     position: sticky;
+    top: 0;
+    z-index: 5;
     background-color: var(--purple-2);
     height: 50px;
     box-shadow: 0px 0px 10px var(--dark-shadow);
@@ -112,6 +114,93 @@ nav>section>a:hover{
 /*===Footer===*/
 footer{
     background-color: var(--purple-1);
+}
+/*===Index Page===*/
+.indexMain{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 2% 0;
+}
+.indexMain>section{
+    margin: 2% 0;
+}
+.indexMain>section:nth-child(even){
+    background-color: var(--purple-2);
+    color: white;
+    border-radius: 15px;
+    width: 70%;
+    margin: auto;
+    padding: 2%;
+    font-size: 20px;
+    text-indent: 2em;
+    line-height: 1.5em;
+}
+.mollyImageSection{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-image: url("../images/forest-background.jpg");
+    background-size: auto;
+    background-position: center;
+    overflow: hidden;
+}
+.mollyInfo{
+    height: auto;
+    border-radius: 10px;
+    color: white;
+    padding: 2%;
+    padding-top: 5%;
+}
+.mollyInfo>*{
+    text-shadow: -3px 2px 3px black;
+    margin: 10% 0;
+}
+.mollyImage{
+    width: 20%;
+    margin-left: 20%;
+    transform: translateY(10%);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.mollyImage>img{
+    width: 100%;
+}
+.quickLinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+}
+.quickLinks>a, .quickLinks>a:visited{
+    text-decoration: none;
+    color: black;
+}
+.firstParagraph{
+    border-radius: 15px 0 0 15px;
+}
+.yurtImageSection{
+    width: 100%;
+    background-image: url("../images/stream-background.jpg");
+    background-size: 80%;
+    background-position: 10%,0%;
+}
+.yurtImage{
+    width: 30%;
+    margin-left: 60%;
+    margin-top: 10%;
+    transform: translateY(8%);
+    border: solid 2px var(--purple-1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.yurtImage>img{
+    width: 100%;
+    transform: scale(1.1);
+}
+.secondParagraph{
+    border-radius: 0 15px 15px 0;
 }
 /*===Basic Form===*/
 fieldset>legend{
@@ -332,13 +421,25 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 .fleProfilePic:hover{
     cursor: pointer;
 }
+/*===Yoga Insert===*/
+.fullInsert{
+    width: 50%;
+    border-radius: 15px;
+    background-color: var(--purple-1);
+    color: white;
+    margin: auto;
+    padding: 2%;
+}
+.fullInsert>form>fieldset>*{
+    margin: 2% 0;
+}
 /*===Yoga Classes===*/
 .calenderContainer{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15%;
     width: 80%;
-    padding: 2%;
+    padding: 2% 10%;
     margin: auto;
     border: solid 2px blue;
     border-radius: 15px;
