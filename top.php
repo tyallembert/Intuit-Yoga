@@ -23,6 +23,7 @@
     </head>
 
 <?php
+$loggedIn = false;
 include 'phpFunctions.php';
 include 'lib/constants.php';
 print '<body id = "' .PATH_PARTS['filename']. '">';

@@ -1,5 +1,12 @@
 <?php
-include 'top.php';
+//starts session for passing variables
+session_start();
+$loggedIn = $_SESSION['loggedIn'];
+if($loggedIn){
+    include 'loggedIn/top.php';
+}else{
+    include 'top.php';
+}
 
 include 'header.php';
 ?>

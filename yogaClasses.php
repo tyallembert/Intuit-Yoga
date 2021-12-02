@@ -1,5 +1,12 @@
 <?php
-include 'top.php';
+//starts session for passing variables
+session_start();
+$loggedIn = $_SESSION['loggedIn'];
+if($loggedIn){
+    include 'loggedIn/top.php';
+}else{
+    include 'top.php';
+}
 
 include 'header.php';
 
@@ -9,11 +16,39 @@ $sql .= 'ORDER BY fldStartDate';
 $data = '';
 $classes = $thisDatabaseReader->select($sql, $data);
 
-$sqluser = 'SELECT *';
-$sqluser .= 'FROM tblUsers';
-$sqluser .= 'WHERE pmkEmail = ?';
-$datauser = array($email);
-$currentUser = $thisDatabaseReader->select($sqluser, $datauser);
+//pre define variables
+$email = $_SESSION['email'];
+$cost = '';
+$clickedClassID = '';
+
+//put data in database
+if(isset($_POST['btnSessionCost'])){
+    //sanitation
+    $cost = 90;
+    $clickedClassID = (int)getData('hidClassID');
+
+    //validation
+    
+
+    if($saveData){
+        $sql = 'INSERT INTO tblYogaClassesUsers SET ';
+        $sql .= 'fpkEmail = ?, ';
+        $sql .= 'fpkClassID = ?, ';
+        $sql .= 'fldAmountPaid = ?';
+
+        $data = array($email, $critterID, $donationAmount);
+        
+        //==Save to AdopterWildlife table==
+        if(DEBUG){
+            print $thisDatabaseReader->displayQuery($sql, $data);
+        }else{
+            $thisDatabaseWriter->insert($sql, $data);
+        }
+    }
+}elseif(isset($_POST['btnIndividualCost'])){
+    $cost = '18';
+    $clickedClassID = (int)getData('hidClassID');
+}
 ?>
 <main>
     <section class = "calenderContainer">
@@ -32,23 +67,33 @@ $currentUser = $thisDatabaseReader->select($sqluser, $datauser);
                     print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                     //Session Cost
                     print '<section class = "costSection">';
-                        print '<section>';
+                        print '<form action = "#" method = "POST" class = "sessionForm">';
+                            print '<input
+                                        type = "hidden"
+                                        name = "hidClassID"
+                                        value = "'.$class['pmkClassID'].'"
+                                    >';
                             print '<p><span class = "moneyAmount">$90</span> per session</p>';
                             print '<input id = "btnSessionCost"     
                                         name = "btnSessionCost"
-                                        type = "button"
+                                        type = "submit"
                                         value = "Sign up"
                                     >';
-                        print '</section>';
+                        print '</form>';
                         //Individual Cost
-                        print '<section>';
+                        print '<form action = "#" method = "POST" class = "individualForm">';
+                            print '<input
+                                        type = "hidden"
+                                        name = "hidClassID"
+                                        value = "'.$class['pmkClassID'].'"
+                                    >';
                             print '<p><span class = "moneyAmount">$18</span> per individual class</p>';
                             print '<input id = "btnIndividualCost"     
                                         name = "btnIndividualCost"
-                                        type = "button"
+                                        type = "submit"
                                         value = "Sign up"
                                     >';
-                        print '</section>';
+                        print '</form>';
                     print '</section>';
                     //ask a question
                     print '<section class = "askQuestion">';

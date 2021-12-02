@@ -49,19 +49,35 @@ $saveData = true;
                     $sql .= 'FROM tblUsers ';
                     $data = '';
                     $users = $thisDatabaseReader->select($sql, $data);
-                    foreach($users as $user){
-                        //choose if its a user logging in or admin
-                        if(in_array($user['pmkEmail'], $adminEmails) && in_array($user['fldPassword'], $adminPasswords)){
-                            //sending email over to logged in pages
-                            header('Location: admin/insertYoga.php');
-                            exit;
-                        }elseif($user['pmkEmail'] == $email && $user['fldPassword'] == $password){
-                            //sending email over to logged in pages
-                            $_SESSION['email'] = $email;
-                            header('Location: loggedIn/yogaClasses.php');
-                            exit;
-                        }
 
+                    foreach($users as $user){
+                        print '<p class = "mistake">Single User:'.$email.'</p>';
+                        print '<p class = "mistake">List User:'.$user['pmkEmail'].'</p>';
+
+                        if($email == $user['pmkEmail'] && $password == $user['fldPassword']){
+                            //choose if its a user logging in or admin
+                            if(in_array($email, $adminEmails) && in_array($password, $adminPasswords)){
+                                //sending email over to logged in pages
+                                header('Location: admin/insertYoga.php');
+                                exit;
+                            }elseif($user['pmkEmail'] == $email && $user['fldPassword'] == $password){
+                                //sending email over to logged in pages
+                                $_SESSION['email'] = $email;
+                                $loggedIn = true;
+                                $_SESSION['loggedIn'] = $loggedIn;
+                                header('Location: yogaClasses.php');
+                                //header('Location: loggedIn/yogaClasses.php');
+                                exit;
+                            }
+                        }else{
+                            $userOrPasswordIncorrect = true;
+                        }
+                        
+                    }
+                    if($userOrPasswordIncorrect){
+                        print '<p class = "mistake">Username or Password is Incorrect</p>';
+                    }else{
+                        print '<p class = "mistake">This email does not exist with any account</p>';
                     }
                 }
             }

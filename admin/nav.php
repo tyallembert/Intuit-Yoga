@@ -2,22 +2,22 @@
     <p>I<span>.</span>Y<span>.</span>E<span>.</span>S</p>
     <section>
         <a class = "<?php
+        if (PATH_PARTS['filename'] == "teacherCourses"){
+            print 'activePage';
+        }
+        ?>" href = "students.php">Teacher Courses</a>
+
+        <a class = "<?php
         if (PATH_PARTS['filename'] == "insertYoga"){
             print 'activePage';
         }
         ?>" href = "insertYoga.php">New Yoga Classes</a>
 
         <a class = "<?php
-        if (PATH_PARTS['filename'] == "yogaClasses"){
+        if (PATH_PARTS['filename'] == "insertTeacher"){
             print 'activePage';
         }
-        ?>" href = "yogaClasses.php">New Teacher Training</a>
-
-        <a class = "<?php
-        if (PATH_PARTS['filename'] == "teacherCourses"){
-            print 'activePage';
-        }
-        ?>" href = "teacherCourses.php">Teacher Courses</a>
+        ?>" href = "insertTeacher.php">New Teacher Training</a>
 
         <a class = "<?php
         if (PATH_PARTS['filename'] == "login"){
