@@ -2,16 +2,16 @@
     <p>I<span>.</span>Y<span>.</span>E<span>.</span>S</p>
     <section>
         <a class = "<?php
-        if (PATH_PARTS['filename'] == "teacherCourses"){
+        if (PATH_PARTS['filename'] == "courses"){
             print 'activePage';
         }
-        ?>" href = "students.php">Teacher Courses</a>
+        ?>" href = "courses.php">Paticipants</a>
 
         <a class = "<?php
         if (PATH_PARTS['filename'] == "insertYoga"){
             print 'activePage';
         }
-        ?>" href = "insertYoga.php">New Yoga Classes</a>
+        ?>" href = "insertYoga.php">New Yoga Class</a>
 
         <a class = "<?php
         if (PATH_PARTS['filename'] == "insertTeacher"){

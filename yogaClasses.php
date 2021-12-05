@@ -20,37 +20,89 @@ $classes = $thisDatabaseReader->select($sql, $data);
 $email = $_SESSION['email'];
 $cost = '';
 $clickedClassID = '';
+$saveData = true;
 
-//put data in database
-if(isset($_POST['btnSessionCost'])){
+?>
+<main>
+    <?php
+    //put data in database
+if(isset($_POST['btnSessionCost']) && $loggedIn){
     //sanitation
     $cost = 90;
     $clickedClassID = (int)getData('hidClassID');
 
     //validation
-    
+    //cost
+    if($cost != 90){
+        print '<p class = "mistake">Error with cost</p>';
+        $saveData = false;
+    }
+    //classID
+    if(!is_numeric($clickedClassID)){
+        print '<p class = "mistake">Error with class ID</p>';
+        $saveData = false;
+    }
 
     if($saveData){
         $sql = 'INSERT INTO tblYogaClassesUsers SET ';
         $sql .= 'fpkEmail = ?, ';
         $sql .= 'fpkClassID = ?, ';
-        $sql .= 'fldAmountPaid = ?';
+        $sql .= 'fldAmountPaid = ?,';
+        $sql .= 'fldDateSignup = NOW()';
 
-        $data = array($email, $critterID, $donationAmount);
+        $data = array($email, $clickedClassID, $cost);
         
         //==Save to AdopterWildlife table==
         if(DEBUG){
             print $thisDatabaseReader->displayQuery($sql, $data);
         }else{
             $thisDatabaseWriter->insert($sql, $data);
+            print '<section class = "successfulDatabase">';
+                print '<h2>You have successfully signed up!</h2>';
+                print '<a href = "index.php">Continue</a>';
+            print '</section>';
         }
     }
-}elseif(isset($_POST['btnIndividualCost'])){
-    $cost = '18';
+}elseif(isset($_POST['btnIndividualCost']) && $loggedIn){
+    $cost = 18;
     $clickedClassID = (int)getData('hidClassID');
+
+    //validation
+    //cost
+    if($cost != 18){
+        print '<p class = "mistake">Error with cost</p>';
+        $saveData = false;
+    }
+    //classID
+    if(!is_numeric($clickedClassID)){
+        print '<p class = "mistake">Error with class ID</p>';
+        $saveData = false;
+    }
+
+    if($saveData){
+        $sql = 'INSERT INTO tblYogaClassesUsers SET ';
+        $sql .= 'fpkEmail = ?, ';
+        $sql .= 'fpkClassID = ?, ';
+        $sql .= 'fldAmountPaid = ?,';
+        $sql .= 'fldDateSignup = NOW()';
+
+        $data = array($email, $clickedClassID, $cost);
+        
+        //==Save to AdopterWildlife table==
+        if(DEBUG){
+            print $thisDatabaseReader->displayQuery($sql, $data);
+        }else{
+            $thisDatabaseWriter->insert($sql, $data);
+            print '<section class = "successfulDatabase">';
+                print '<h2>You have successfully signed up!</h2>';
+                print '<a href = "index.php">Continue</a>';
+            print '</section>';
+        }
+    }
+}elseif((isset($_POST['btnIndividualCost'])||isset($_POST['btnSessionCost']))&& !$loggedIn){
+    header("Location: signup.php");
 }
-?>
-<main>
+    ?>
     <section class = "calenderContainer">
         <?php
             foreach($classes as $class){

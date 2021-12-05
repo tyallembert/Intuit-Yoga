@@ -29,6 +29,6 @@
         if (PATH_PARTS['filename'] == "login"){
             print 'activePage';
         }
-        ?>" href = "../login.php">Logout</a>
+        ?>" href = "loggingOut.php">Logout</a>
     </section>
 </nav>

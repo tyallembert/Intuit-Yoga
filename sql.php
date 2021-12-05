@@ -30,6 +30,42 @@ CREATE TABLE tblYogaClasses (
     fldParticipants TINYINT(1)
 );
 </pre>
+<h2>Create YogaClassesUsers Table</h2>
+<pre>
+CREATE TABLE tblYogaClassesUsers (
+    pmkSpecificID INT AUTO_INCREMENT PRIMARY KEY,
+    fpkEmail VARCHAR(50),
+    fpkClassID TINYINT(1),
+    fldAmountPaid TINYINT(1),
+    fldDateSignup DATETIME
+);
+</pre>
+<h2>Create Teacher Courses Table</h2>
+<pre>
+CREATE TABLE tblTeacherCourses (
+    pmkClassID INT AUTO_INCREMENT PRIMARY KEY,
+    fldDay VARCHAR(15),
+    fldStartTime VARCHAR(10),
+    fldEndTime VARCHAR(10),
+    fldStartDate VARCHAR(15),
+    fldEndDate VARCHAR(15),
+    fldTitle VARCHAR(50),
+    fldDescription VARCHAR(200),
+    fldSessionCost TINYINT(1),
+    fldIndividualCost TINYINT(1),
+    fldParticipants TINYINT(1)
+);
+</pre>
+<h2>Create TeacherCoursesUsers Table</h2>
+<pre>
+CREATE TABLE tblTeacherCoursesUsers (
+    pmkSpecificID INT AUTO_INCREMENT PRIMARY KEY,
+    fpkEmail VARCHAR(50),
+    fpkClassID TINYINT(1),
+    fldAmountPaid TINYINT(1),
+    fldDateSignup DATETIME
+);
+</pre>
 
 <?php
 include 'footer.php';
