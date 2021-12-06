@@ -3,44 +3,52 @@ include 'top.php';
 include 'header.php';
 
 $classID = (isset($_GET['classID'])) ? (int) htmlspecialchars($_GET['classID']) : 0;
+$classType = (isset($_GET['type'])) ? htmlspecialchars($_GET['type']) : 0;
 
-$sqlYoga = 'SELECT *';
-$sqlYoga .= 'FROM tblYogaClasses';
-$dataYoga = '';
-$allYogaClasses = $thisDatabaseReader->select($sqlYoga, $dataYoga);
-
-$sqlTeacher = 'SELECT *';
-$sqlTeacher .= 'FROM tblTeacherCourses';
-$dataTeacher = '';
-$allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
+if($classType == "yoga"){
+    $sql = 'SELECT fldProfilePicture, fldFirstName, fldLastName, pmkEmail, fldPhone, fldExperience, fldAmountPaid ';
+    $sql .= 'FROM tblUsers ';
+    $sql .= 'JOIN tblYogaClassesUsers ON pmkEmail=fpkEmail ';
+    $sql .= 'JOIN tblYogaClasses ON pmkClassID=fpkClassID ';
+    $sql .= 'WHERE fpkClassID = ? ';
+}elseif($classType == "teacher"){
+    $sql = 'SELECT * ';
+    $sql .= 'FROM tblUsers ';
+    $sql .= 'JOIN tblTeacherCoursesUsers ON pmkEmail=fpkEmail ';
+    $sql .= 'JOIN tblTeacherCourses ON pmkClassID=fpkClassID ';
+    $sql .= 'WHERE fpkClassID = ? ';
+}
+$data = array($classID);
+$allClasses = $thisDatabaseReader->select($sql, $data);
 
 ?>
 <main>
-    <section class = 'displayYogaSection'>
-        <h2>Class Participants</h2>
+    <h2>Class Participants</h2>
+    <?php 
+    print '<h2>'.$class['fldDay'].' '.$class['fldStartTime'].' - '.$class['fldEndTime'].'</h2>';
+    ?>
+    <section class = 'displayClassParticipants'>
         <?php
-        foreach($allYogaClasses as $class){
-            print '<section class = "yogaForm">';
-                //day
-                print '<h2>'.$class['fldDay'].' '.$class['fldStartTime'].' - '.$class['fldEndTime'].'</h2>';
-                //start date and end date
-                print '<p class = "yogaDates">'.$class['fldStartDate'].' - '.$class['fldEndDate'].'</p>';
-                //title
-                print '<h3>'.$class['fldTitle'].'</h3>';
-                //description
-                print '<p class = "yogaDescription">'.$class['fldDescription'].'</p>';
-                //participants
-                print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
-                //ask a question
-                print '<section class = "askQuestion">';
-                    print '<a href = "participants.php">Participants</a>';
-                print '</section>';
+        foreach($allClasses as $class){
+            print '<section class = "participantSection">';
+                //profile pic
+                print '<figure class = "participantPic">';
+                    print '<img src = "../images/'.$class['fldProfilePicture'].'">';
+                print '</figure>';
+                //Name
+                print '<h2>'.$class['fldFirstName'].' '.$class['fldLastName'].'</h2>';
+                //email
+                print '<p class = "participantEmail">Email: '.$class['pmkEmail'].'</p>';
+                //phone number
+                print '<p class = "participantPhone">Phone Number: '.$class['fldPhone'].'</p>';
+                //experience
+                if($classType == "yoga"){
+                    print '<p class = "experience">Experience: '.$class['fldExperience'].'</p>';
+                }
+                print '<p class = "participantPaid">Amount Paid: $'.$class['fldAmountPaid'].'</p>';
             print '</section>';
         }
         ?>
-    </section>
-    <section class = 'displayTeacherSection'>
-        <h2>Teacher Courses</h2>
     </section>
 </main>
 <?php

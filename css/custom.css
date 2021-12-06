@@ -541,13 +541,13 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 .allStudentsSection>h2:nth-child(1){
     grid-area: yogah2;
 }
-.allStudentsSection>section:nth-child(1){
+.displayYogaSection{
     grid-area: yogaParagraph;
 }
 .allStudentsSection>h2:nth-child(2){
     grid-area: teacherh2;
 }
-.allStudentsSection>section:nth-child(2){
+.displayTeacherSection{
     grid-area: teacherParagraph;
 }
 .allStudentsSection>section{
@@ -566,4 +566,35 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     background-color: white;
     padding: 2%;
     opacity: 0.7;
+}
+/*===Each Class===*/
+.displayClassParticipants{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+}
+.participantSection{
+    margin: 1%;
+    padding: 1%;
+    background-color: var(--purple-1);
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 5px var(--light-shadow);
+    color: white;
+    text-shadow: -2px 2px 4px var(--dark-shadow);
+}
+.participantPic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px var(--dark-shadow);
+    margin: auto;
+    overflow: hidden;
+}
+.participantPic>img{
+    width: 70%;
+    margin: auto;
 }

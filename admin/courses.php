@@ -29,7 +29,7 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
                     //participants
                     print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                     //participants
-                    print '<a href = "participants.php?classID='.$class['fldClassID'].'&type=yoga">Participants</a>';
+                    print '<a href = "participants.php?classID='.$class['pmkClassID'].'&type=yoga">Participants</a>';
                 print '</section>';
             }
             ?>
