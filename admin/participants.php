@@ -6,7 +6,8 @@ $classID = (isset($_GET['classID'])) ? (int) htmlspecialchars($_GET['classID']) 
 $classType = (isset($_GET['type'])) ? htmlspecialchars($_GET['type']) : 0;
 
 if($classType == "yoga"){
-    $sql = 'SELECT fldProfilePicture, fldFirstName, fldLastName, pmkEmail, fldPhone, fldExperience, fldAmountPaid ';
+    $sql = 'SELECT fldProfilePicture, fldFirstName, fldLastName, pmkEmail, ';
+    $sql .= 'fldPhone, fldExperience, fldAmountPaid, fldDay, fldStartTime, fldEndTime ';
     $sql .= 'FROM tblUsers ';
     $sql .= 'JOIN tblYogaClassesUsers ON pmkEmail=fpkEmail ';
     $sql .= 'JOIN tblYogaClasses ON pmkClassID=fpkClassID ';
@@ -22,10 +23,10 @@ $data = array($classID);
 $allClasses = $thisDatabaseReader->select($sql, $data);
 
 ?>
-<main>
-    <h2>Class Participants</h2>
+<main class = "participantsMain">
+    <h2>Class Participants for</h2>
     <?php 
-    print '<h2>'.$class['fldDay'].' '.$class['fldStartTime'].' - '.$class['fldEndTime'].'</h2>';
+    print '<h2>'.$allClasses[0]['fldDay'].' '.$allClasses[0]['fldStartTime'].' - '.$allClasses[0]['fldEndTime'].'</h2>';
     ?>
     <section class = 'displayClassParticipants'>
         <?php

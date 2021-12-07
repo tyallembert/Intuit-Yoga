@@ -124,9 +124,9 @@ footer{
     padding: 2% 0;
 }
 .indexMain>section{
-    margin: 2% 0;
+    margin: 1% auto;
 }
-.indexMain>section:nth-child(2), .indexMain>section:nth-child(3), .indexMain>section:nth-child(5){
+.indexMain>section:nth-child(3), .indexMain>section:nth-child(5){
     background-color: var(--purple-2);
     color: white;
     border-radius: 15px;
@@ -171,12 +171,24 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 40%;
+    width: 50%;
+    margin: auto;
 }
 .quickLinks>a, .quickLinks>a:visited{
     text-decoration: none;
-    color: black;
+    color: white;
+    padding: 2%;
+    background-color: var(--purple-2);
+    border: solid 2px var(--purple-3);
+    border-radius: 25px;
     margin: auto 5%;
+    font-size: 1.3em;
+    transition: all 200ms ease;
+}
+.quickLinks>a:hover{
+    background-color: var(--purple-1);
+    box-shadow: -2px 2px 5px var(--dark-shadow);
+    transform: translate(2px, -2px);
 }
 .firstParagraph{
     border-radius: 15px 0 0 15px;
@@ -295,6 +307,12 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 .loginInfo p label{
     margin-left: 10px;
 }
+.loginInfo p i{
+    position: absolute;
+    top: 40%;
+    left: 47.5%;
+    color: var(--purple-3);
+}
 .signupImage a, .loginImage a{
     text-decoration: none;
 }
@@ -387,6 +405,18 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 .signupPasswords>p>label{
     margin-left: 10px;
 }
+.signupPasswords>p:nth-child(2)>i{
+    position: absolute;
+    top: 77%;
+    right: 32%;
+    color: var(--purple-3);
+}
+.signupPasswords>p:nth-child(3)>i{
+    position: absolute;
+    top: 84%;
+    right: 32%;
+    color: var(--purple-3);
+}
 .profilePicSection{
     display: flex;
     justify-content: center;
@@ -430,7 +460,7 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     width: 80%;
     padding: 2% 10%;
     margin: auto;
-    border: solid 2px blue;
+    box-shadow: 0px 0px 10px var(--dark-shadow);
     border-radius: 15px;
 }
 .yogaForm{
@@ -568,6 +598,9 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     opacity: 0.7;
 }
 /*===Each Class===*/
+.participantsMain>h2{
+    margin-left: 5%;
+}
 .displayClassParticipants{
     display: flex;
     flex-wrap: wrap;

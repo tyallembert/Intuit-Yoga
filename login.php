@@ -104,6 +104,7 @@ $saveData = true;
                         type = "password"
                         value = "<?php print $password; ?>"
                     >
+                    <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                 </p> 
                 <p>
                     <input id = 'btnSubmit'

@@ -32,3 +32,27 @@ function convertDates(element){
         allElements[i].innerHTML = firstMonth + ' ' + firstDay + ', ' + firstYear + ' - ' + secondMonth + ' ' + secondDay + ', ' + secondYear;
     }
 }
+
+//password
+const togglePassword = document.getElementById('togglePassword');
+const password = document.getElementById('pssPassword');
+
+const toggleRePassword = document.getElementById('toggleRePassword');
+const rePassword = document.getElementById('pssRePassword');
+
+togglePassword.addEventListener('click', visablePass);
+toggleRePassword.addEventListener('click', visableRePass);
+function visablePass(e) {
+  // toggle the type attribute
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
+  // toggle the eye slash icon
+  this.classList.toggle('fa-eye-slash');
+};
+function visableRePass(e) {
+    // toggle the type attribute
+    const type = rePassword.getAttribute('type') === 'password' ? 'text' : 'password';
+    rePassword.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+  };

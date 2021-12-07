@@ -15,6 +15,7 @@
         <link rel = "stylesheet" media = "(max-width: 600px)"
             href = "css/phone.css?version=<?php print time(); ?>"
             type = "text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
         <script
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

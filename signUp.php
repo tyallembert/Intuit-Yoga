@@ -236,7 +236,7 @@ $saveData = true;
                 </p>
             </fieldset>
             <fieldset class = "signupPasswords">
-            <legend>Password</legend>
+            <legend>Make a Password You'll Remember</legend>
                 <p>
                     <label for = "pssPassword">Password</label>
                     <input id = "pssPassword"     
@@ -245,6 +245,7 @@ $saveData = true;
                         type = "password"
                         value = "<?php print $password; ?>"
                     >
+                    <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                 </p> 
                 <p>
                     <label for = "pssRePassword">Confirm Password</label>
@@ -254,6 +255,7 @@ $saveData = true;
                         type = "password"
                         value = "<?php print $repassword; ?>"
                     >
+                    <i class="far fa-eye" id="toggleRePassword" style="cursor: pointer;"></i>
                 </p>
             </fieldset>
                 <p>

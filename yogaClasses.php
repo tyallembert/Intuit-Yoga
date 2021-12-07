@@ -103,6 +103,9 @@ if(isset($_POST['btnSessionCost']) && $loggedIn){
     header("Location: signup.php");
 }
     ?>
+    <section class = "yogaParagraphs">
+        
+    </section>
     <section class = "calenderContainer">
         <?php
             foreach($classes as $class){
