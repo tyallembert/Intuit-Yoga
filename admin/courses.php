@@ -35,6 +35,8 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
                         print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                         //participants
                         print '<a href = "participants.php?classID='.$class['pmkClassID'].'&type=yoga" class = "goToParticipants">Participants</a>';
+                        //Update
+                        print '<a href = "insertYoga.php?classID='.$class['pmkClassID'].'&isUpdate=1&active=1" class = "goToUpdate">Update</a>';
                     print '</section>';
                 }
             }
@@ -57,6 +59,8 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
                         print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                         //participants
                         print '<a href = "participants.php?classID='.$class['pmkClassID'].'&type=yoga" class = "goToParticipants">Participants</a>';
+                        //Update
+                        print '<a href = "insertTeacher.php?classID='.$class['pmkClassID'].'&isUpdate=1&active=0" class = "goToUpdate">Update</a>';
                     print '</section>';
                 }
             }
@@ -82,6 +86,8 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
                         print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                         //participants
                         print '<a href = "participants.php?classID='.$class['pmkClassID'].'&type=teacher" class = "goToParticipants">Participants</a>';
+                        //Update
+                        print '<a href = "insertTeacher.php?classID='.$class['pmkClassID'].'&isUpdate=1&active=1" class = "goToUpdate">Update</a>';
                     print '</section>';
                 }
             }
@@ -104,6 +110,8 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
                         print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                         //participants
                         print '<a href = "participants.php?classID='.$class['pmkClassID'].'&type=teacher" class = "goToParticipants">Participants</a>';
+                        //Update
+                        print '<a href = "insertTeacher.php?classID='.$class['pmkClassID'].'&isUpdate=1&active=0" class = "goToUpdate">Update</a>';
                     print '</section>';
                 }
             }

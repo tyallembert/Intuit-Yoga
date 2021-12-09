@@ -1,7 +1,12 @@
 <?php
 include 'top.php';
 
+$isUpdate = (isset($_GET['isUpdate'])) ? (bool) htmlspecialchars($_GET['isUpdate']) : false;
+$classID = (isset($_GET['classID'])) ? (int) htmlspecialchars($_GET['classID']) : 0;
+$active = (isset($_GET['active'])) ? (int) htmlspecialchars($_GET['active']) : 0;
+
 include 'header.php';
+
 
 $dayOfClass = '';
 $startTime = '';
@@ -16,6 +21,30 @@ $participants = '';
 
 $saveData = true;
 
+if($isUpdate){
+    $sql = 'SELECT *';
+    $sql .= 'FROM tblYogaClasses ';
+    $sql .= 'WHERE pmkClassID = ? ';
+
+    $data = array($classID);
+    $allClasses = $thisDatabaseReader->select($sql, $data);
+
+    $dayOfClass = $allClasses[0]['fldDay'];;
+    $startTime = $allClasses[0]['fldStartTime'];
+    $endTime = $allClasses[0]['fldEndTime'];
+    $startDate = $allClasses[0]['fldStartDate'];
+    $endDate = $allClasses[0]['fldEndDate'];
+    $classTitle = $allClasses[0]['fldTitle'];
+    $classDescription = $allClasses[0]['fldDescription'];
+    $sessionCost = $allClasses[0]['fldSessionCost'];
+    $individualCost = $allClasses[0]['fldIndividualCost'];;
+    $participants = $allClasses[0]['fldParticipants'];
+}
+?>
+<main>
+    <section class = "fullInsert">
+        <section class = "errorMessages">
+<?php
 if(isset($_POST['btnSubmit'])){
     if(DEBUG){
         print '<p>Post Array:</p><pre>';
@@ -127,7 +156,7 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldActiveClass = ? ';
             $sql .= 'WHERE pmkClassID = ' . $classID . ';';
 
-            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants, 1);
+            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants, $active);
                 
         }else{
             $sql = 'INSERT INTO tblYogaClasses SET ';
@@ -143,25 +172,28 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldParticipants = ?, ';
             $sql .= 'fldActiveClass = ? ';
 
-            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants, 1);
+            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants, $active);
         }
         //==Save to Wildlife table==
         if(DEBUG){
             print $thisDatabaseReader->displayQuery($sql, $data);
         }else{
-            if($thisDatabaseWriter->insert($sql, $data)){
-                /*print '<section class="successfulDatabase">';
-                print '<h2 >You have successfully inserted a new record!</h2>';
-                print '<a href="insertYoga.php">Continue</a>';
-                print '</section>';*/
+            $thisDatabaseWriter->insert($sql, $data);
+            if($isUpdate){
+                print '<section class="successfulDatabase">';
+                print '<h2 >You have successfully updated the class!</h2>';
+                print '</section>';
+            }else{
+                print '<section class="successfulDatabase">';
+                print '<h2 >You have successfully inserted a new class!</h2>';
+                print '</section>';
             }
         }
     }
 
 }
 ?>
-<main>
-    <section class = "fullInsert">
+        </section>
         <form action = "#" method = "POST">
             <fieldset>
                 <!--===Day of class===-->

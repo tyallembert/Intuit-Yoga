@@ -165,10 +165,7 @@ if(isset($_POST['btnSessionCost']) && $loggedIn){
                     print '</section>';
                     //ask a question
                     print '<section class = "askQuestion">';
-                        print '<input id = "btnQuestion"
-                                name = "btnQuestion"
-                                type = "button"
-                                value = "Ask a question">';
+                        print '<a href="mailto:mstoner921@gmail.com">Ask a Question</a>';
                     print '</section>';
                 print '</section>';
             }
