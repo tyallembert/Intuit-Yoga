@@ -10,6 +10,7 @@ $firstName = '';
 $lastName = '';
 $email = '';
 $phone = '';
+$venmo = '';
 $experience = '';
 $password = '';
 $repassword = '';
@@ -33,6 +34,7 @@ $saveData = true;
                 $lastName = getData('txtLastName');
                 $email = filter_var($_POST['txtEmail'], FILTER_SANITIZE_EMAIL);
                 $phone = getData('txtPhone');
+                $venmo = getData('txtVenmo');
                 $experience = getData('radExperience');
                 $password = getData('pssPassword');
                 $repassword = getData('pssRePassword');
@@ -84,6 +86,16 @@ $saveData = true;
                     print '<p class = "mistake">Please enter a valid phone number</p>';
                     $saveData = false;
                 }
+                //Venmo
+                if ($venmo == "")
+                {
+                    print '<p class = "mistake">Venmo cannot be blank</p>';
+                    $saveData = false;
+                }
+                elseif (!verifyAlphaNum($venmo)){
+                    print '<p class = "mistake">Please enter a valid Venmo Username</p>';
+                    $saveData = false;
+                }
                 //Experience level 
                 if ($experience != "Newbie" && $experience != "Intermediate" && $experience != "Expert")
                 {
@@ -120,9 +132,16 @@ $saveData = true;
 
                 if($saveData){
 
-                    if(move_uploaded_file($upload_array[0], $upload_array[1])){
-                        print '<p>Success!</p>';
-                    };
+                    print '<p>array 1: '.$upload_array[0].'</p>';
+                    print '<p>array 2: '.$upload_array[1].'</p>';
+                    print '<p>array 3: '.$upload_array[2].'</p>';
+                    if(DEBUG){
+                        if(move_uploaded_file($upload_array[0], $upload_array[1])){
+                            print '<p>Success!</p>';
+                        }else{
+                            print '<p>Fail</p>';
+                        }
+                    }
                     
                     $sql = 'INSERT INTO tblUsers SET ';
                     $sql .= 'fldProfilePicture = ?, ';
@@ -139,20 +158,22 @@ $saveData = true;
                         print $thisDatabaseReader->displayQuery($sql, $data);
                     }else{
                         if($thisDatabaseWriter->insert($sql, $data)){
-                            print '<section class="successfulDatabase">';
-                            print '<h2 >You have successfully signed up!</h2>';
-                            print '<a href="loggedIn/yogaClasses.php">Continue</a>';
-                            print '</section>';
+                            //print '<section class="successfulDatabase">';
+                            //print '<h2 >You have successfully signed up!</h2>';
+                            //print '<a href="index.php">Continue</a>';
+                            //print '</section>';
 
                             //sending email over to logged in pages
                             $_SESSION['email'] = $email;
+
+                            header("Location: index.php");
                         }
                     }
                 }
             }
             ?>
         </section>
-        <form action = "loggedIn/yogaClasses.php" method="POST" enctype="multipart/form-data">
+        <form action = "#" method="POST" enctype="multipart/form-data">
             <h2>Sign Up</h2>
             <fieldset class = "profilePicFieldset">
                 <section class = "profilePicSection">
@@ -207,36 +228,46 @@ $saveData = true;
                         value = "<?php print $phone; ?>"
                     >
                 </p>
+                <p>
+                    <label for = "txtVenmo">Venmo</label>
+                    <input id = "txtVenmo"     
+                        name = "txtVenmo"
+                        maxlength = "50"
+                        type = "text"
+                        required
+                        value = "<?php print $venmo; ?>"
+                    >
+                </p>
             </fieldset>
             <fieldset class = "signupExperience">
             <legend>Experience Level</legend>
                 <p>
-                    <label for = "radExperienceNewbie">Newbie</label>
                     <input id = "radExperienceNewbie"     
                         name = "radExperience"
                         type = "radio"
                         value = "Newbie"
                     >
+                    <label for = "radExperienceNewbie">Newbie</label>
                 </p>
                 <p>
-                    <label for = "radExperienceIntermediate">Intermediate</label>
                     <input id = "radExperienceIntermediate"     
                         name = "radExperience"
                         type = "radio"
                         value = "Intermediate"
                     >
+                    <label for = "radExperienceIntermediate">Intermediate</label>
                 </p>
                 <p>
-                    <label for = "radExperienceExpert">Expert</label>
                     <input id = "radExperienceExpert"     
                         name = "radExperience"
                         type = "radio"
                         value = "Expert"
                     >
+                    <label for = "radExperienceExpert">Expert</label>
                 </p>
             </fieldset>
             <fieldset class = "signupPasswords">
-            <legend>Make a Password You'll Remember</legend>
+            <legend>Create Password</legend>
                 <p>
                     <label for = "pssPassword">Password</label>
                     <input id = "pssPassword"     
@@ -245,7 +276,7 @@ $saveData = true;
                         type = "password"
                         value = "<?php print $password; ?>"
                     >
-                    <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                    <!--<i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>-->
                 </p> 
                 <p>
                     <label for = "pssRePassword">Confirm Password</label>
@@ -255,7 +286,7 @@ $saveData = true;
                         type = "password"
                         value = "<?php print $repassword; ?>"
                     >
-                    <i class="far fa-eye" id="toggleRePassword" style="cursor: pointer;"></i>
+                    <!--<i class="far fa-eye" id="toggleRePassword" style="cursor: pointer;"></i>-->
                 </p>
             </fieldset>
                 <p>

@@ -18,41 +18,62 @@ function displayImage(e) {
 window.addEventListener('load',convertDates())
 //https://stackoverflow.com/questions/47575119/how-to-get-month-name-from-an-html-date-input-value
 function convertDates(element){
-    var allElements = $('.yogaDates')
-    for(var i = 0; i < allElements.length; i++){
-        var dates = allElements[i].innerHTML
-        var splitDate = dates.split("-");
-        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        var firstYear = splitDate[0]
-        var firstMonth = months[splitDate[1]-1]
-        var firstDay = splitDate[2]
-        var secondYear = splitDate[3]
-        var secondMonth = months[splitDate[4]-1]
-        var secondDay = splitDate[5]
-        allElements[i].innerHTML = firstMonth + ' ' + firstDay + ', ' + firstYear + ' - ' + secondMonth + ' ' + secondDay + ', ' + secondYear;
+    var path = window.location.pathname
+    if(path == "/cs148/intuitYoga/yogaClasses.php"){
+        var allElements = $('.yogaDates')
+        actuallyConvert(allElements)
+    }else if(path == "/cs148/intuitYoga/teacherCourses.php"){
+        var allElements = $('.teacherDates')
+        actuallyConvert(allElements)
+    }else if(path == "/cs148/intuitYoga/admin/courses.php"){
+        var allElements = $('.yogaDates')
+        actuallyConvert(allElements)
+        var allElements = $('.teacherDates')
+        actuallyConvert(allElements)
+    }
+}
+//actually convert the dates
+function actuallyConvert(allElements){
+    var path = window.location.pathname
+    if(path == "/cs148/intuitYoga/yogaClasses.php" || path == "/cs148/intuitYoga/teacherCourses.php" || path == "/cs148/intuitYoga/admin/courses.php"){
+        for(var i = 0; i < allElements.length; i++){
+            var dates = allElements[i].innerHTML
+            var splitDate = dates.split("-");
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var firstYear = splitDate[0]
+            var firstMonth = months[splitDate[1]-1]
+            var firstDay = splitDate[2]
+            var secondYear = splitDate[3]
+            var secondMonth = months[splitDate[4]-1]
+            var secondDay = splitDate[5]
+            allElements[i].innerHTML = firstMonth + ' ' + firstDay + ', ' + firstYear + ' - ' + secondMonth + ' ' + secondDay + ', ' + secondYear;
+        }
     }
 }
 
 //password
-const togglePassword = document.getElementById('togglePassword');
-const password = document.getElementById('pssPassword');
+if(window.location.pathname == "/cs148/intuitYoga/signUp.php"){
+    console.log("got in")
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('pssPassword');
 
-const toggleRePassword = document.getElementById('toggleRePassword');
-const rePassword = document.getElementById('pssRePassword');
+    const toggleRePassword = document.getElementById('toggleRePassword');
+    const rePassword = document.getElementById('pssRePassword');
 
-togglePassword.addEventListener('click', visablePass);
-toggleRePassword.addEventListener('click', visableRePass);
-function visablePass(e) {
+    togglePassword.addEventListener('click', visablePass(password));
+    toggleRePassword.addEventListener('click', visableRePass(rePassword));
+}
+function visablePass(password) {
   // toggle the type attribute
   const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
   password.setAttribute('type', type);
   // toggle the eye slash icon
-  this.classList.toggle('fa-eye-slash');
+  document.getElementById('togglePassword').classList.toggle('fa-eye-slash');
 };
-function visableRePass(e) {
+function visableRePass(rePassword) {
     // toggle the type attribute
     const type = rePassword.getAttribute('type') === 'password' ? 'text' : 'password';
     rePassword.setAttribute('type', type);
     // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
+    document.getElementById('toggleRePassword').classList.toggle('fa-eye-slash');
   };

@@ -13,7 +13,8 @@ if($classType == "yoga"){
     $sql .= 'JOIN tblYogaClasses ON pmkClassID=fpkClassID ';
     $sql .= 'WHERE fpkClassID = ? ';
 }elseif($classType == "teacher"){
-    $sql = 'SELECT * ';
+    $sql = 'SELECT fldProfilePicture, fldFirstName, fldLastName, pmkEmail, ';
+    $sql .= 'fldPhone, fldAmountPaid, fldDay, fldStartTime, fldEndTime ';
     $sql .= 'FROM tblUsers ';
     $sql .= 'JOIN tblTeacherCoursesUsers ON pmkEmail=fpkEmail ';
     $sql .= 'JOIN tblTeacherCourses ON pmkClassID=fpkClassID ';
@@ -53,5 +54,5 @@ $allClasses = $thisDatabaseReader->select($sql, $data);
     </section>
 </main>
 <?php
-include 'footer.php';
+include '../footer.php';
 ?>

@@ -126,17 +126,7 @@ footer{
 .indexMain>section{
     margin: 1% auto;
 }
-.indexMain>section:nth-child(3), .indexMain>section:nth-child(5){
-    background-color: var(--purple-2);
-    color: white;
-    border-radius: 15px;
-    width: 70%;
-    margin: auto;
-    padding: 2%;
-    font-size: 20px;
-    text-indent: 2em;
-    line-height: 1.5em;
-}
+
 .mollyImageSection{
     display: flex;
     flex-direction: row;
@@ -167,31 +157,71 @@ footer{
 .mollyImage>img{
     width: 100%;
 }
-.quickLinks{
+.aboutSignupSection{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    width: 50%;
     margin: auto;
-}
-.quickLinks>a, .quickLinks>a:visited{
-    text-decoration: none;
-    color: white;
-    padding: 2%;
-    background-color: var(--purple-2);
-    border: solid 2px var(--purple-3);
-    border-radius: 25px;
-    margin: auto 5%;
-    font-size: 1.3em;
-    transition: all 200ms ease;
-}
-.quickLinks>a:hover{
-    background-color: var(--purple-1);
-    box-shadow: -2px 2px 5px var(--dark-shadow);
-    transform: translate(2px, -2px);
+    width: 90%;
+    padding: 1%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px var(--dark-shadow);
 }
 .firstParagraph{
-    border-radius: 15px 0 0 15px;
+    margin: 0 5%;
+}
+.firstParagraph>h2{
+    margin-bottom: 2%;
+    font-size: 2em;
+}
+.firstParagraph>p{
+    text-indent: 2em;
+    line-height: 2em;
+    font-size: 1.2em;
+}
+.a1Section{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    margin: 0 2%;
+    transition: all 300ms ease;
+}
+.a2Section{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    margin: 0 2%;
+    transition: all 300ms ease;
+}
+.a1Section>figure>img, .a2Section>figure>img{
+    height: 100%;
+    transition: all 300ms ease;
+}
+.a1Section>p, .a2Section>p{
+    transition: all 100ms ease;
+}
+.a1Section>figure, .a2Section>figure{
+    width: 100%;
+}
+.quickLinkYoga, .quickLinkTeacher{
+    position: absolute;
+    top: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    text-shadow: -2px 2px 2px var(--dark-shadow);
+}
+/*=Hover=*/
+.a1Section:hover>figure>img, .a2Section:hover>figure>img{
+    transform: scale(1.1);
+}
+.a1Section:hover>p, .a2Section:hover>p{
+    transform: scale(1.1) translateY(-5px);
 }
 .yurtImageSection{
     width: 100%;
@@ -213,7 +243,19 @@ footer{
     transform: scale(1.1);
 }
 .secondParagraph{
-    border-radius: 0 15px 15px 0;
+    width: 50%;
+    margin: auto;
+    padding: 2%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px var(--dark-shadow);
+}
+.secondParagraph>h2{
+    font-size: 2em;
+}
+.secondParagraph>p{
+    text-indent: 2em;
+    line-height: 2em;
+    font-size: 1.2em;
 }
 /*===Basic Form===*/
 fieldset>legend{
@@ -329,6 +371,20 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     text-decoration: none;
     text-align: center;
 }
+/*===Mistakes===*/
+.errorMessages{
+    width: 100%;
+    grid-area: error;
+}
+.mistake{
+    background-color: rgb(197, 78, 78);
+    border-radius: 5px;
+    width: 50%;
+    text-align: center;
+    margin: 1% auto;
+    color: white;
+    padding: 1%;
+}
 /*===Sign Up===*/
 .backgroundOverlay{
     position: absolute;
@@ -354,7 +410,8 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 .entireSignup{
     display: grid;
     grid-template-columns: 40% 60%;
-    grid-template-areas: 
+    grid-template-areas:
+    "error error" 
     "imageSignup signup";
     width: 50%;
     margin: 50px auto;
@@ -453,7 +510,12 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     cursor: pointer;
 }
 /*===Yoga Classes===*/
-.calenderContainer{
+.yogaParagraphs{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+.yogaCalenderContainer{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15%;
@@ -516,6 +578,74 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     display: flex;
     justify-content: center;
     padding: 2%;
+}
+/*===Teacher courses===*/
+.teacherCalenderContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15%;
+    width: 80%;
+    padding: 2% 10%;
+    margin: auto;
+    box-shadow: 0px 0px 10px var(--dark-shadow);
+    border-radius: 15px;
+}
+.teacherForm{
+    color: white;
+    background-color: var(--purple-1);
+    border-radius: 10px;
+    padding-bottom: 5%;
+    transition: all 200ms ease;
+}
+.teacherForm:hover{
+    transform: translate(5px, -5px);
+    box-shadow: -5px 5px 5px var(--dark-shadow);
+}
+.teacherForm>h2{
+    padding: 2%;
+    border-radius: 10px 10px 0 0;
+    background-color: var(--purple-3);
+}
+.teacherForm>p{
+    padding: 0 0 2% 2%;
+}
+.teacherDates{
+    padding: 0 0 2% 2%;
+}
+.teacherForm>h3{
+    display: inline-block;
+    padding: 2%;
+    border-radius: 0 10px 10px 0;
+    background-color: var(--purple-3);
+    border: solid 2px var(--purple-2);
+}
+.teacherDescription{
+    padding: 2%;
+}
+.teacherParticipants{
+    padding: 2%;
+}
+.teacherCostSection{
+    display: grid;
+    grid-template-areas: 
+    "p p"
+    "form1 form2";
+    padding: 2%;
+}
+.teacherCostSection>p{
+    grid-area: p;
+}
+.teacherCostSection>*{
+    text-align: center;
+    padding: 2%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px var(--dark-shadow);
+}
+.teacherCostSection>form:nth-child(2){
+    grid-area: form1;
+}
+.teacherCostSection>form:nth-child(3){
+    grid-area: form2;
 }
 /*===Successful Database===*/
 .successfulDatabase{

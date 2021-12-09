@@ -1,7 +1,7 @@
 <?php
 include 'top.php';
 
-include '../header.php';
+include 'header.php';
 
 $dayOfClass = '';
 $startTime = '';
@@ -124,7 +124,7 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldSessionCost = ?, ';
             $sql .= 'fldIndividualCost = ?, ';
             $sql .= 'fldParticipants = ? ';
-            $sql .= 'WHERE pmkWildlifeId = ' . $critterID . ';';
+            $sql .= 'WHERE pmkClassID = ' . $classID . ';';
 
             $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants);
                 

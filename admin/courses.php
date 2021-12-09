@@ -37,10 +37,10 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
         <h2>Teacher Courses</h2>
         <section class = 'displayTeacherSection'>
             <?php
-            foreach($allYogaClasses as $class){
+            foreach($allTeacherCourses as $class){
                 print '<section class = "yogaForm">';
-                    //day
-                    print '<h2>'.$class['fldDay'].' '.$class['fldStartTime'].' - '.$class['fldEndTime'].'</h2>';
+                    //Course Name
+                    print '<h2>'.$class['fldCourseName'].'</h2>';
                     //start date and end date
                     print '<p class = "yogaDates">'.$class['fldStartDate'].' - '.$class['fldEndDate'].'</p>';
                     //title
@@ -48,7 +48,7 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
                     //participants
                     print '<p class = "yogaParticipants">Max Participants: '.$class['fldParticipants'].'</p>';
                     //participants
-                    print '<a href = "participants.php?classID='.$class['fldClassID'].'&type=teacher">Participants</a>';
+                    print '<a href = "participants.php?classID='.$class['pmkClassID'].'&type=teacher">Participants</a>';
                 print '</section>';
             }
             ?>
@@ -56,5 +56,5 @@ $allTeacherCourses = $thisDatabaseReader->select($sqlTeacher, $dataTeacher);
     </section>
 </main>
 <?php
-include 'footer.php';
+include '../footer.php';
 ?>

@@ -104,9 +104,22 @@ if(isset($_POST['btnSessionCost']) && $loggedIn){
 }
     ?>
     <section class = "yogaParagraphs">
-        
+        <section class = "beginnerClass">
+            <h2>Beginner Classes</h2>
+            <p>Beginner classes include poses that are straightforward and clear for the beginning yoga student. We are guided through each pose and offered varied expressions, props and accomodations. Most poses are held for about 30 seconds in sequences that inspire the body to let go of stress and the mind to still. We will also explore vinyasa (series of postures) and gentle breathwork. Classes are 75 minutes long, including a 10-15 minute quiet meditation at the end.</p>
+            <figure class = 'yogaFig1'>
+                <img src = 'images/example.png'>
+            </figure>
+        </section>
+        <section class = "IntermediateClass">
+            <h2>Beginner/Intermediate Classes</h2>
+            <p>Beginner/Intermediate classes include simple poses for warm-ups and stretching, and also some more challenging strengthening poses and vinyasas. Students are guided through the full class, with offerings of accommodations and props to meet the needs of each individual learner. Classes are 75 minutes long, including a 10 - 15 minute quiet meditation at the end.</p>
+            <figure class = 'yogaFig2'>
+                <img src = 'images/example.png'>
+            </figure>
+        </section>
     </section>
-    <section class = "calenderContainer">
+    <section class = "yogaCalenderContainer">
         <?php
             foreach($classes as $class){
                 print '<section class = "yogaForm">';

@@ -44,15 +44,14 @@ CREATE TABLE tblYogaClassesUsers (
 <pre>
 CREATE TABLE tblTeacherCourses (
     pmkClassID INT AUTO_INCREMENT PRIMARY KEY,
-    fldDay VARCHAR(15),
+    fldCourseName VARCHAR(50),
     fldStartTime VARCHAR(10),
     fldEndTime VARCHAR(10),
     fldStartDate VARCHAR(15),
     fldEndDate VARCHAR(15),
     fldTitle VARCHAR(50),
     fldDescription VARCHAR(200),
-    fldSessionCost TINYINT(1),
-    fldIndividualCost TINYINT(1),
+    fldSessionCost INT(1),
     fldParticipants TINYINT(1)
 );
 </pre>
