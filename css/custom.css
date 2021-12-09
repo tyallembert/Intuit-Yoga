@@ -606,9 +606,6 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     border-radius: 10px 10px 0 0;
     background-color: var(--purple-3);
 }
-.teacherForm>p{
-    padding: 0 0 2% 2%;
-}
 .teacherDates{
     padding: 0 0 2% 2%;
 }
@@ -691,6 +688,7 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 /*===Participants===*/
 .allStudentsSection{
     display: grid;
+    grid-template-columns: 47% auto;
     grid-template-areas: 
     "yogah2 teacherh2"
     "yogaParagraph teacherParagraph";
@@ -703,6 +701,8 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 }
 .displayYogaSection{
     grid-area: yogaParagraph;
+    display: flex;
+    flex-direction: column;
 }
 .allStudentsSection>h2:nth-child(2){
     grid-area: teacherh2;
@@ -710,14 +710,14 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
 .displayTeacherSection{
     grid-area: teacherParagraph;
 }
-.allStudentsSection>section{
+.activeYoga, .inactiveYoga, .activeTeacher, .inactiveTeacher{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5%;
     width: 100%;
     margin: auto;
 }
-.allStudentsSection>section>section>a, .allStudentsSection>section>section>a:visited{
+.goToParticipants{
     text-decoration: none;
     width: 50%;
     border-radius: 15px;
@@ -725,6 +725,77 @@ input[type = 'submit']:hover, input[type = 'button']:hover{
     color: black;
     background-color: white;
     padding: 2%;
+    opacity: 0.7;
+}
+.yogaForm, .teacherForm{
+    position: relative;
+}
+.deleteClass{
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+    background-color: rgb(197, 78, 78);
+    border: none;
+    box-shadow: -1px 1px 3px var(--dark-shadow);
+    color: white;
+    padding: 2% 4%;
+    border-radius: 0px 10px 0px 0px;
+    transition: all 200ms ease;
+}
+.deleteClass:hover{
+    transform: scale(1.1);
+    box-shadow: -1px 1px 7px var(--dark-shadow);
+    cursor: pointer;
+}
+.addClass{
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+    background-color: rgb(96, 177, 86);
+    border: none;
+    box-shadow: -1px 1px 3px var(--dark-shadow);
+    color: white;
+    padding: 2% 4%;
+    border-radius: 0px 10px 0px 0px;
+    transition: all 200ms ease;
+}
+.addClass:hover{
+    transform: scale(1.1);
+    box-shadow: -1px 1px 7px var(--dark-shadow);
+    cursor: pointer;
+}
+/*===Confirm remove===*/
+.confirmRemoveMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.confirmRemoveForm{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    background-color: var(--purple-2);
+    color: white;
+    padding: 2%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px var(--dark-shadow);
+}
+.confirmRemoveForm>h2{
+    margin-bottom: 5%;
+}
+.confirmRemoveForm>a{
+    text-decoration: none;
+    padding: 1%;
+    border: none;
+    margin: auto;
+    height: 30px;
+    width: 20%;
+    font-size: 0.9em;
+    border-radius: 20px;
+    color: black;
+    background-color: white;
     opacity: 0.7;
 }
 /*===Each Class===*/

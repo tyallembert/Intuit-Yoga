@@ -123,10 +123,11 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldDescription = ?, ';
             $sql .= 'fldSessionCost = ?, ';
             $sql .= 'fldIndividualCost = ?, ';
-            $sql .= 'fldParticipants = ? ';
+            $sql .= 'fldParticipants = ?, ';
+            $sql .= 'fldActiveClass = ? ';
             $sql .= 'WHERE pmkClassID = ' . $classID . ';';
 
-            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants);
+            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants, 1);
                 
         }else{
             $sql = 'INSERT INTO tblYogaClasses SET ';
@@ -139,9 +140,10 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldDescription = ?, ';
             $sql .= 'fldSessionCost = ?, ';
             $sql .= 'fldIndividualCost = ?, ';
-            $sql .= 'fldParticipants = ? ';
+            $sql .= 'fldParticipants = ?, ';
+            $sql .= 'fldActiveClass = ? ';
 
-            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants);
+            $data = array($dayOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $individualCost, $participants, 1);
         }
         //==Save to Wildlife table==
         if(DEBUG){

@@ -48,7 +48,7 @@ include 'header.php';
     </section>
     <section class = "yurtImageSection">
         <figure class = 'yurtImage'>
-            <img src = 'images/yurt.jpg'>
+            <img src = 'images/yurt.jpg' usemap = "#workmap">
         </figure>
     </section>
     <section class = 'secondParagraph'>

@@ -14,7 +14,11 @@ $sessionCost = '';
 $participants = '';
 
 $saveData = true;
-
+?>
+<main>
+    <section class = "fullInsert">
+        <section class = 'errorMessages'>
+<?php
 if(isset($_POST['btnSubmit'])){
     if(DEBUG){
         print '<p>Post Array:</p><pre>';
@@ -111,10 +115,11 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldTitle = ?, ';
             $sql .= 'fldDescription = ?, ';
             $sql .= 'fldSessionCost = ?, ';
-            $sql .= 'fldParticipants = ? ';
+            $sql .= 'fldParticipants = ?, ';
+            $sql .= 'fldActiveClass = ? ';
             $sql .= 'WHERE pmkClassID = ' . $classID . ';';
 
-            $data = array($nameOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $participants);
+            $data = array($nameOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $participants, 1);
                 
         }else{
             $sql = 'INSERT INTO tblTeacherCourses SET ';
@@ -126,9 +131,10 @@ if(isset($_POST['btnSubmit'])){
             $sql .= 'fldTitle = ?, ';
             $sql .= 'fldDescription = ?, ';
             $sql .= 'fldSessionCost = ?, ';
-            $sql .= 'fldParticipants = ? ';
+            $sql .= 'fldParticipants = ?, ';
+            $sql .= 'fldActiveClass = ? ';
 
-            $data = array($nameOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $participants);
+            $data = array($nameOfClass, $startTime, $endTime, $startDate, $endDate, $classTitle, $classDescription, $sessionCost, $participants, 1);
         }
         //==Save to Wildlife table==
         if(DEBUG){
@@ -145,8 +151,7 @@ if(isset($_POST['btnSubmit'])){
 
 }
 ?>
-<main>
-    <section class = "fullInsert">
+        </section>
         <form action = "#" method = "POST">
             <fieldset>
                 <!--===Day of class===-->
@@ -154,7 +159,7 @@ if(isset($_POST['btnSubmit'])){
                     <label for = "txtDayOfClass">Course Name</label>
                     <input id = "txtDayOfClass"     
                             name = "txtDayOfClass"
-                            maxlength = "25"
+                            maxlength = "50"
                             type = "text"
                             value = "<?php print $nameOfClass; ?>"
                         >
@@ -199,7 +204,7 @@ if(isset($_POST['btnSubmit'])){
                     <label for = "txtClassTitle">Class Title</label>
                     <input id = "txtClassTitle"     
                             name = "txtClassTitle"
-                            maxlength = "25"
+                            maxlength = "50"
                             type = "text"
                             value = "<?php print $classTitle; ?>"
                         >
@@ -209,7 +214,7 @@ if(isset($_POST['btnSubmit'])){
                     <label for = "txtClassDescription">Class Description</label>
                     <input id = "txtClassDescription"     
                             name = "txtClassDescription"
-                            maxlength = "25"
+                            maxlength = "200"
                             type = "text"
                             value = "<?php print $classDescription; ?>"
                         >
